@@ -1,0 +1,8 @@
+include CHANGES LICENSE README
+
+recursive-include docs Makefile *.rst *.py
+prune docs/build
+
+recursive-include otp_twilio/fixtures *
+
+global-exclude *.pyc *.pyo
