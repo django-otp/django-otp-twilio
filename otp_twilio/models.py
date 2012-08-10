@@ -59,6 +59,14 @@ class TwilioSMSDevice(Device):
         if self.number == 'test':
             return token
 
+        if settings.OTP_TWILIO_NO_DELIVERY:
+            logger.info('SMS token: {0}'.format(token))
+        else:
+            self._deliver_token(token)
+
+        return u'Sent by SMS'
+
+    def _deliver_token(self, token):
         self._validate_config()
 
         url = 'https://api.twilio.com/2010-04-01/Accounts/{0}/SMS/Messages.json'.format(settings.OTP_TWILIO_ACCOUNT)
@@ -76,8 +84,6 @@ class TwilioSMSDevice(Device):
             self._report_error(str(response.error))
         elif 'sid' not in response.json:
             self._report_error(response.json.get('message'))
-
-        return u'Sent by SMS'
 
     def _validate_config(self):
         if settings.OTP_TWILIO_ACCOUNT is None:
