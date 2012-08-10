@@ -11,6 +11,7 @@ class Settings(object):
         'OTP_TWILIO_ACCOUNT': None,
         'OTP_TWILIO_AUTH': None,
         'OTP_TWILIO_FROM': None,
+        'OTP_TWILIO_NO_DELIVERY': False,
     }
 
     def __init__(self):

@@ -52,6 +52,16 @@ The phone number to send SMS messages from. This must be one of your Twilio
 numbers.
 
 
+.. setting:: OTP_TWILIO_NO_DELIVERY
+
+**OTP_TWILIO_NO_DELIVERY**
+
+Default: ``False``
+
+Send tokens to the 'otp_twilio.models' logger instead of delivering them by SMS.
+Useful for development.
+
+
 License
 -------
 
