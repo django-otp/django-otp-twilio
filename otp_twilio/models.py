@@ -51,7 +51,7 @@ class TwilioSMSDevice(Device):
         Sends the current TOTP token to ``self.number``.
 
         :returns: ``'Sent by SMS'`` on success.
-        :raises: StandardError if delivery fails.
+        :raises: Exception if delivery fails.
         """
         token = '{0:06}'.format(totp(self.bin_key))
 
@@ -97,7 +97,7 @@ class TwilioSMSDevice(Device):
 
     def _report_error(self, message):
         logger.error('Error sending token by Twilio SMS: {0}'.format(message))
-        raise StandardError('Could not deliver the token')
+        raise Exception('Could not deliver the token')
 
 
     def verify_token(self, token):
