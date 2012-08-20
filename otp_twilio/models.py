@@ -55,7 +55,7 @@ class TwilioSMSDevice(Device):
         """
         token = '{0:06}'.format(totp(self.bin_key))
 
-        # Special topic for test cases
+        # Special number for test cases
         if self.number == 'test':
             return token
 

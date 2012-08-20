@@ -6,5 +6,5 @@ make html
     -p '*.rst;*.py' \
     -R \
     -c echo \
-    source ../otp_sns
+    source ../otp_twilio
 } | while read line; do make html; done
