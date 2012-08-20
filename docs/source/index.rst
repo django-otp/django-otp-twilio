@@ -46,7 +46,7 @@ Your Twilio auth token.
 
 **OTP_TWILIO_FROM**
 
-Default: ``'Sent'``
+Default: ``None``
 
 The phone number to send SMS messages from. This must be one of your Twilio
 numbers.

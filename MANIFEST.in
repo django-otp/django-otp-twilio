@@ -1,8 +1,8 @@
 include CHANGES LICENSE README
 
-recursive-include docs Makefile *.rst *.py
+recursive-include docs *.rst *.py Makefile
 prune docs/build
 
 recursive-include otp_twilio/fixtures *
 
-global-exclude *.pyc *.pyo
+global-exclude .DS_Store *.pyc *.pyo .*.sw?
