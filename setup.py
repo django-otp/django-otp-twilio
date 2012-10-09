@@ -5,7 +5,7 @@ from distutils.core import setup
 
 setup(
     name='django-otp-twilio',
-    version='0.1.0',
+    version='0.1.1',
     description="A django-otp plugin that delivers tokens via Twilio's SMS service.",
     long_description=open('README').read(),
     author='Peter Sagerson',

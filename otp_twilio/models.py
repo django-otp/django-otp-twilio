@@ -103,7 +103,7 @@ class TwilioSMSDevice(Device):
     def verify_token(self, token):
         try:
             token = int(token)
-        except ValueError:
+        except StandardError:
             return False
         else:
             return any(totp(self.bin_key, drift=drift) == token for drift in [0, -1])
