@@ -80,10 +80,16 @@ class TwilioSMSDevice(Device):
             auth=(settings.OTP_TWILIO_ACCOUNT, settings.OTP_TWILIO_AUTH)
         )
 
-        if response.error is not None:
-            self._report_error(str(response.error))
-        elif 'sid' not in response.json:
-            self._report_error(response.json.get('message'))
+        try:
+            response.raise_for_status()
+        except Exception as e:
+            logger.exception('Error sending token by Twilio SMS: {0}'.format(e))
+            raise
+
+        if 'sid' not in response.json():
+            message = response.json().get('message')
+            logger.error('Error sending token by Twilio SMS: {0}'.format(message))
+            raise Exception(message)
 
     def _validate_config(self):
         if settings.OTP_TWILIO_ACCOUNT is None:
@@ -94,11 +100,6 @@ class TwilioSMSDevice(Device):
 
         if settings.OTP_TWILIO_FROM is None:
             raise ImproperlyConfigured('OTP_TWILIO_FROM must be set to one of your Twilio phone numbers')
-
-    def _report_error(self, message):
-        logger.error('Error sending token by Twilio SMS: {0}'.format(message))
-        raise Exception('Could not deliver the token')
-
 
     def verify_token(self, token):
         try:
