@@ -1,5 +1,10 @@
 .. vim: ft=rst nospell tw=80
 
+v0.1.2 - March 24, 2013 - Bug fix
+---------------------------------
+
+- Fix for requests integration.
+
 
 v0.1.1 - October 8, 2012 - Bug fix
 ----------------------------------
