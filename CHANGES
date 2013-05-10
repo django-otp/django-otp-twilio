@@ -1,5 +1,12 @@
 .. vim: ft=rst nospell tw=80
 
+v0.1.3 - May 9, 2013 - Unit test improvements
+---------------------------------------------
+
+Major unit test cleanup. Tests should pass or be skipped under all supported
+versions of Django, with or without custom users and timzeone support.
+
+
 v0.1.2 - March 24, 2013 - Bug fix
 ---------------------------------
 

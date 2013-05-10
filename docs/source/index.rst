@@ -62,6 +62,12 @@ Send tokens to the 'otp_twilio.models' logger instead of delivering them by SMS.
 Useful for development.
 
 
+Changes
+-------
+
+:doc:`changes`
+
+
 License
 -------
 
