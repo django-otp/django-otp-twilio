@@ -29,11 +29,13 @@ class TwilioSMSDevice(Device):
 
         *CharField*: The secret key used to generate TOTP tokens.
     """
-    number = models.CharField(max_length=16,
+    number = models.CharField(
+        max_length=16,
         help_text="The mobile number to deliver tokens to."
     )
 
-    key = models.CharField(max_length=40,
+    key = models.CharField(
+        max_length=40,
         validators=[hex_validator(20)],
         default=lambda: random_hex(20),
         help_text="A random key used to generate tokens (hex-encoded)."
@@ -44,7 +46,7 @@ class TwilioSMSDevice(Device):
 
     @property
     def bin_key(self):
-        return unhexlify(self.key)
+        return unhexlify(self.key.encode())
 
     def generate_challenge(self):
         """
@@ -64,7 +66,7 @@ class TwilioSMSDevice(Device):
         else:
             self._deliver_token(token)
 
-        return u'Sent by SMS'
+        return "Sent by SMS"
 
     def _deliver_token(self, token):
         self._validate_config()
@@ -76,7 +78,8 @@ class TwilioSMSDevice(Device):
             'Body': str(token),
         }
 
-        response = requests.post(url, data=data,
+        response = requests.post(
+            url, data=data,
             auth=(settings.OTP_TWILIO_ACCOUNT, settings.OTP_TWILIO_AUTH)
         )
 
@@ -104,7 +107,7 @@ class TwilioSMSDevice(Device):
     def verify_token(self, token):
         try:
             token = int(token)
-        except StandardError:
+        except Exception:
             return False
         else:
             return any(totp(self.bin_key, drift=drift) == token for drift in [0, -1])
