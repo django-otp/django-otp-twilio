@@ -1,5 +1,12 @@
 .. vim: ft=rst nospell tw=80
 
+v0.2.1 - May 8, 2014 - Message template
+---------------------------------------
+
+- :setting:`OTP_TWILIO_TOKEN_TEMPLATE` allows you to customize the message that
+  is sent by SMS.
+
+
 v0.2.0 - November 10, 2013 - Django 1.6
 ---------------------------------------
 

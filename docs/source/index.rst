@@ -66,7 +66,7 @@ Useful for development.
 
 **OTP_TWILIO_TOKEN_TEMPLATE**
 
-Default: ``'{token}'``
+Default: ``"{token}"``
 
 A string template for generating the token message. By default, this is just the
 token itself, but you can customize it. The template will be rendered with
