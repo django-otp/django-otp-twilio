@@ -1,7 +1,7 @@
 django-otp-twilio
 =================
 
-.. include:: ../../README
+.. include:: ../../README.rst
 
 
 Twilio SMS Devices
