@@ -62,6 +62,17 @@ Send tokens to the 'otp_twilio.models' logger instead of delivering them by SMS.
 Useful for development.
 
 
+.. setting:: OTP_TWILIO_TOKEN_TEMPLATE
+
+**OTP_TWILIO_TOKEN_TEMPLATE**
+
+Default: ``'{token}'``
+
+A string template for generating the token message. By default, this is just the
+token itself, but you can customize it. The template will be rendered with
+Python string formatting (``template.format(token=token)``).
+
+
 Changes
 -------
 
