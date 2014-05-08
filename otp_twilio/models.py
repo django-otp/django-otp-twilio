@@ -28,6 +28,7 @@ class TwilioSMSDevice(Device):
     .. attribute:: key
 
         *CharField*: The secret key used to generate TOTP tokens.
+
     """
     number = models.CharField(
         max_length=16,
@@ -54,17 +55,19 @@ class TwilioSMSDevice(Device):
 
         :returns: ``'Sent by SMS'`` on success.
         :raises: Exception if delivery fails.
+
         """
-        token = '{0:06}'.format(totp(self.bin_key))
+        token = format(totp(self.bin_key), '06d')
+        message = settings.OTP_TWILIO_TOKEN_TEMPLATE.format(token=token)
 
         # Special number for test cases
         if self.number == 'test':
-            return token
+            return message
 
         if settings.OTP_TWILIO_NO_DELIVERY:
-            logger.info('SMS token: {0}'.format(token))
+            logger.info(message)
         else:
-            self._deliver_token(token)
+            self._deliver_token(message)
 
         return "Sent by SMS"
 
