@@ -53,23 +53,21 @@ class TwilioSMSDevice(Device):
         """
         Sends the current TOTP token to ``self.number``.
 
-        :returns: ``'Sent by SMS'`` on success.
+        :returns: :setting:`OTP_TWILIO_CHALLENGE_MESSAGE` on success.
         :raises: Exception if delivery fails.
 
         """
         token = format(totp(self.bin_key), '06d')
         message = settings.OTP_TWILIO_TOKEN_TEMPLATE.format(token=token)
 
-        # Special number for test cases
-        if self.number == 'test':
-            return message
-
         if settings.OTP_TWILIO_NO_DELIVERY:
             logger.info(message)
         else:
             self._deliver_token(message)
 
-        return "Sent by SMS"
+        challenge = settings.OTP_TWILIO_CHALLENGE_MESSAGE.format(token=token)
+
+        return challenge
 
     def _deliver_token(self, token):
         self._validate_config()
