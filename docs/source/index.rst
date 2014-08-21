@@ -42,6 +42,19 @@ Default: ``None``
 Your Twilio auth token.
 
 
+.. setting:: OTP_TWILIO_CHALLENGE_MESSAGE
+
+**OTP_TWILIO_CHALLENGE_MESSAGE**
+
+Default: ``"Sent by SMS"``
+
+The message returned by
+:meth:`~otp_twilio.models.TwilioSMSDevice.generate_challenge`. This may contain
+``'{token}'``, which will be replaced by the token. This completely negates any
+security benefit to the device, but it's handy for development, especially in
+combination with :setting:`OTP_TWILIO_NO_DELIVERY`.
+
+
 .. setting:: OTP_TWILIO_FROM
 
 **OTP_TWILIO_FROM**

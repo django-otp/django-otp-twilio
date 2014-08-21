@@ -5,9 +5,13 @@ from django.db import IntegrityError
 from django_otp.oath import totp
 from django_otp.tests import TestCase
 
-from .conf import override_settings
+from django.test.utils import override_settings
 
 
+@override_settings(
+    OTP_TWILIO_NO_DELIVERY=True,
+    OTP_TWILIO_CHALLENGE_MESSAGE='{token}',
+)
 class TestTwilioSMS(TestCase):
     def setUp(self):
         try:
@@ -20,6 +24,8 @@ class TestTwilioSMS(TestCase):
                                                   key='01234567890123456789')
             self.bob.twiliosmsdevice_set.create(number='test',
                                                 key='98765432109876543210')
+
+        self._delivered = None
 
     def test_current(self):
         device = self.alice.twiliosmsdevice_set.get()
@@ -56,11 +62,26 @@ class TestTwilioSMS(TestCase):
 
         self.assertTrue(not ok)
 
-    @override_settings(OTP_TWILIO_TOKEN_TEMPLATE='Token is {token}')
+    @override_settings(
+        OTP_TWILIO_NO_DELIVERY=False,
+        OTP_TWILIO_TOKEN_TEMPLATE='Token is {token}',
+    )
     def test_format(self):
         device = self.alice.twiliosmsdevice_set.get()
-        token = device.generate_challenge()
-        match = re.match(r'Token is (\d{6})', token)
+        with self._patch('otp_twilio.models.TwilioSMSDevice._deliver_token', self._deliver_token):
+            device.generate_challenge()
+        match = re.match(r'^Token is (\d{6})$', self._delivered)
 
         self.assertTrue(match is not None)
         self.assertTrue(device.verify_token(match.group(1)))
+
+    def _deliver_token(self, token):
+        self._delivered = token
+
+    def _patch(self, *args, **kwargs):
+        try:
+            import mock
+        except ImportError:
+            self.skipTest("mock is not installed")
+        else:
+            return mock.patch(*args, **kwargs)
