@@ -1,7 +1,7 @@
 .. vim: ft=rst nospell tw=80
 
-v0.2.2 - TBD - Challenge template
----------------------------------
+v0.2.2 - Aug 20, 2014 - Challenge template
+------------------------------------------
 
 - :setting:`OTP_TWILIO_CHALLENGE_MESSAGE` allows you to customize the string
   returned to the user after the SMS is sent. It also accepts the {token}
