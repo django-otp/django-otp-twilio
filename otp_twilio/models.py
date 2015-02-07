@@ -15,6 +15,14 @@ from .conf import settings
 logger = logging.getLogger(__name__)
 
 
+def default_key():
+    return random_hex(20)
+
+
+def key_validator(value):
+    return hex_validator(20)(value)
+
+
 class TwilioSMSDevice(Device):
     """
     A :class:`~django_otp.models.Device` that delivers codes via the Twilio SMS
@@ -37,8 +45,8 @@ class TwilioSMSDevice(Device):
 
     key = models.CharField(
         max_length=40,
-        validators=[hex_validator(20)],
-        default=lambda: random_hex(20),
+        validators=[key_validator],
+        default=default_key,
         help_text="A random key used to generate tokens (hex-encoded)."
     )
 
