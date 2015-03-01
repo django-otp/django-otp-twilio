@@ -86,6 +86,15 @@ token itself, but you can customize it. The template will be rendered with
 Python string formatting (``template.format(token=token)``).
 
 
+.. setting:: OTP_TWILIO_TOKEN_VALIDITY
+
+**OTP_TWILIO_TOKEN_VALIDITY**
+
+Default: ``30``
+
+The number of seconds for which a delivered token will be valid.
+
+
 Changes
 -------
 

@@ -1,12 +1,13 @@
 from binascii import unhexlify
 import logging
 import requests
+import time
 
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 
 from django_otp.models import Device
-from django_otp.oath import totp
+from django_otp.oath import TOTP
 from django_otp.util import random_hex, hex_validator
 
 from .conf import settings
@@ -26,8 +27,10 @@ def key_validator(value):
 class TwilioSMSDevice(Device):
     """
     A :class:`~django_otp.models.Device` that delivers codes via the Twilio SMS
-    service. This uses TOTP to generate temporary tokens. We use the default 30
-    second time step and allow a one step grace period.
+    service. This uses TOTP to generate temporary tokens, which are valid for
+    :setting:`OTP_TWILIO_TOKEN_VALIDITY` seconds. Once a given token has been
+    accepted, it is no longer valid, nor is any other token generated at an
+    earlier time.
 
     .. attribute:: number
 
@@ -36,6 +39,10 @@ class TwilioSMSDevice(Device):
     .. attribute:: key
 
         *CharField*: The secret key used to generate TOTP tokens.
+
+    .. attribute:: last_t
+
+        *BigIntegerField*: The t value of the latest verified token.
 
     """
     number = models.CharField(
@@ -48,6 +55,11 @@ class TwilioSMSDevice(Device):
         validators=[key_validator],
         default=default_key,
         help_text="A random key used to generate tokens (hex-encoded)."
+    )
+
+    last_t = models.BigIntegerField(
+        default=-1,
+        help_text="The t value of the latest verified token. The next token must be at a higher time step."
     )
 
     class Meta(Device.Meta):
@@ -65,7 +77,8 @@ class TwilioSMSDevice(Device):
         :raises: Exception if delivery fails.
 
         """
-        token = format(totp(self.bin_key), '06d')
+        totp = self.totp_obj()
+        token = format(totp.token(), '06d')
         message = settings.OTP_TWILIO_TOKEN_TEMPLATE.format(token=token)
 
         if settings.OTP_TWILIO_NO_DELIVERY:
@@ -117,6 +130,26 @@ class TwilioSMSDevice(Device):
         try:
             token = int(token)
         except Exception:
-            return False
+            verified = False
         else:
-            return any(totp(self.bin_key, drift=drift) == token for drift in [0, -1])
+            totp = self.totp_obj()
+            tolerance = settings.OTP_TWILIO_TOKEN_VALIDITY
+
+            for offset in range(-tolerance, 1):
+                totp.drift = offset
+                if (totp.t() > self.last_t) and (totp.token() == token):
+                    self.last_t = totp.t()
+                    self.save()
+
+                    verified = True
+                    break
+            else:
+                verified = False
+
+        return verified
+
+    def totp_obj(self):
+        totp = TOTP(self.bin_key, step=1)
+        totp.time = time.time()
+
+        return totp
