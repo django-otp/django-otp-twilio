@@ -1,5 +1,14 @@
 .. vim: ft=rst nospell tw=80
 
+v0.3.1 - March 1, 2015 - Token validity
+---------------------------------------
+
+- The length of time that tokens are valid can now be configured with
+  :setting:`OTP_TWILIO_TOKEN_VALIDITY`.
+
+- Tokens now become invalid as soon as they have been verified.
+
+
 v0.3.0 - February 7, 2015 - Support Django migrations
 -----------------------------------------------------
 
