@@ -1,11 +1,12 @@
 import re
 
 from django.db import IntegrityError
+from django.test.utils import override_settings
 
 from django_otp.oath import totp
 from django_otp.tests import TestCase
 
-from django.test.utils import override_settings
+from .conf import settings
 
 
 @override_settings(
@@ -25,42 +26,66 @@ class TestTwilioSMS(TestCase):
             self.bob.twiliosmsdevice_set.create(number='test',
                                                 key='98765432109876543210')
 
+        self._now = 1420099200
         self._delivered = None
 
-    def test_current(self):
+    def test_instant(self):
+        """ Verify a code the instant it was generated. """
         device = self.alice.twiliosmsdevice_set.get()
-        token = device.generate_challenge()
-        ok = device.verify_token(token)
+        with self.with_time(self._now):
+            token = device.generate_challenge()
+            ok = device.verify_token(token)
 
         self.assertTrue(ok)
 
-    def test_previous(self):
+    def test_barely_made_it(self):
+        """ Verify a code at the last possible second. """
         device = self.alice.twiliosmsdevice_set.get()
-        token = totp(device.bin_key, t0=30)
-        ok = device.verify_token(token)
+        with self.with_time(self._now):
+            token = device.generate_challenge()
+        with self.with_time(self._now + settings.OTP_TWILIO_TOKEN_VALIDITY):
+            ok = device.verify_token(token)
 
         self.assertTrue(ok)
 
-    def test_past(self):
+    def test_too_late(self):
+        """ Try to verify a code one second after it expires. """
         device = self.alice.twiliosmsdevice_set.get()
-        token = totp(device.bin_key, t0=60)
-        ok = device.verify_token(token)
+        with self.with_time(self._now):
+            token = device.generate_challenge()
+        with self.with_time(self._now + settings.OTP_TWILIO_TOKEN_VALIDITY + 1):
+            ok = device.verify_token(token)
 
-        self.assertTrue(not ok)
+        self.assertFalse(ok)
 
     def test_future(self):
+        """ Try to verify a code from the future. """
         device = self.alice.twiliosmsdevice_set.get()
-        token = totp(device.bin_key, t0=-30)
-        ok = device.verify_token(token)
+        with self.with_time(self._now + 1):
+            token = device.generate_challenge()
+        with self.with_time(self._now):
+            ok = device.verify_token(token)
 
-        self.assertTrue(not ok)
+        self.assertFalse(ok)
+
+    def test_code_reuse(self):
+        """ Try to verify the same code twice. """
+        device = self.alice.twiliosmsdevice_set.get()
+        with self.with_time(self._now):
+            token = device.generate_challenge()
+            ok1 = device.verify_token(token)
+            ok2 = device.verify_token(token)
+
+        self.assertTrue(ok1)
+        self.assertFalse(ok2)
 
     def test_cross_user(self):
         device = self.alice.twiliosmsdevice_set.get()
-        token = device.generate_challenge()
-        ok = self.bob.twiliosmsdevice_set.get().verify_token(token)
+        with self.with_time(self._now):
+            token = device.generate_challenge()
+            ok = self.bob.twiliosmsdevice_set.get().verify_token(token)
 
-        self.assertTrue(not ok)
+        self.assertFalse(ok)
 
     @override_settings(
         OTP_TWILIO_NO_DELIVERY=False,
@@ -75,8 +100,15 @@ class TestTwilioSMS(TestCase):
         self.assertTrue(match is not None)
         self.assertTrue(device.verify_token(match.group(1)))
 
+    #
+    # Utilities
+    #
+
     def _deliver_token(self, token):
         self._delivered = token
+
+    def with_time(self, timestamp):
+        return self._patch('time.time', lambda: timestamp)
 
     def _patch(self, *args, **kwargs):
         try:

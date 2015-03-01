@@ -16,6 +16,7 @@ class Settings(object):
         'OTP_TWILIO_FROM': None,
         'OTP_TWILIO_NO_DELIVERY': False,
         'OTP_TWILIO_TOKEN_TEMPLATE': '{token}',
+        'OTP_TWILIO_TOKEN_VALIDITY': 30,
     }
 
     def __getattr__(self, name):
