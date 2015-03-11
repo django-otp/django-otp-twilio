@@ -1,18 +1,16 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 
 setup(
     name='django-otp-twilio',
-    version='0.3.1',
+    version='0.3.2',
     description="A django-otp plugin that delivers tokens via Twilio's SMS service.",
     long_description=open('README.rst').read(),
     author='Peter Sagerson',
     author_email='psagersDjwublJf@ignorare.net',
-    packages=[
-        'otp_twilio',
-    ],
+    packages=find_packages(),
     url='https://bitbucket.org/psagers/django-otp',
     license='BSD',
     install_requires=[
