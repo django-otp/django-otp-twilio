@@ -17,6 +17,7 @@ class TwilioSMSDeviceAdmin(admin.ModelAdmin):
             'fields': ['number', 'key'],
         }),
     ]
+    raw_id_fields = ['user']
 
 
 try:
