@@ -3,7 +3,6 @@ import re
 from django.db import IntegrityError
 from django.test.utils import override_settings
 
-from django_otp.oath import totp
 from django_otp.tests import TestCase
 
 from .conf import settings
@@ -112,8 +111,11 @@ class TestTwilioSMS(TestCase):
 
     def _patch(self, *args, **kwargs):
         try:
-            import mock
+            from unittest import mock
         except ImportError:
-            self.skipTest("mock is not installed")
-        else:
-            return mock.patch(*args, **kwargs)
+            try:
+                import mock
+            except ImportError:
+                self.skipTest("mock is not installed")
+
+        return mock.patch(*args, **kwargs)
