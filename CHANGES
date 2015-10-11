@@ -1,5 +1,13 @@
 .. vim: ft=rst nospell tw=80
 
+v0.3.3 - October 11, 2015 - Django 1.8
+--------------------------------------
+
+- Use ModelAdmin.raw_id_fields for foreign keys to users.
+
+- General cleanup and compatibility with Django 1.9a1.
+
+
 v0.3.1 - March 1, 2015 - Token validity
 ---------------------------------------
 
