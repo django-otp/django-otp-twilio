@@ -1,18 +1,19 @@
+from __future__ import absolute_import, division, print_function, unicode_literals
+
 import django.conf
 import django.test.utils
-from django.utils.six import u
 
 
 class Settings(object):
     """
     This is a simple class to take the place of the global settings object. An
-    instance will contain all of our settings as attributes, with default values
-    if they are not specified by the configuration.
+    instance will contain all of our settings as attributes, with default
+    values if they are not specified by the configuration.
     """
     _defaults = {
         'OTP_TWILIO_ACCOUNT': None,
         'OTP_TWILIO_AUTH': None,
-        'OTP_TWILIO_CHALLENGE_MESSAGE': u("Sent by SMS"),
+        'OTP_TWILIO_CHALLENGE_MESSAGE': "Sent by SMS",
         'OTP_TWILIO_FROM': None,
         'OTP_TWILIO_NO_DELIVERY': False,
         'OTP_TWILIO_TOKEN_TEMPLATE': '{token}',
