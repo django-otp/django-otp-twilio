@@ -17,11 +17,11 @@ class Migration(migrations.Migration):
             name='TwilioSMSDevice',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(help_text=b'The human-readable name of this device.', max_length=64)),
-                ('confirmed', models.BooleanField(default=True, help_text=b'Is this device ready for use?')),
-                ('number', models.CharField(help_text=b'The mobile number to deliver tokens to.', max_length=16)),
-                ('key', models.CharField(default=otp_twilio.models.default_key, help_text=b'A random key used to generate tokens (hex-encoded).', max_length=40, validators=[otp_twilio.models.key_validator])),
-                ('user', models.ForeignKey(help_text=b'The user that this device belongs to.', to=settings.AUTH_USER_MODEL)),
+                ('name', models.CharField(help_text='The human-readable name of this device.', max_length=64)),
+                ('confirmed', models.BooleanField(default=True, help_text='Is this device ready for use?')),
+                ('number', models.CharField(help_text='The mobile number to deliver tokens to.', max_length=16)),
+                ('key', models.CharField(default=otp_twilio.models.default_key, help_text='A random key used to generate tokens (hex-encoded).', max_length=40, validators=[otp_twilio.models.key_validator])),
+                ('user', models.ForeignKey(help_text='The user that this device belongs to.', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,
