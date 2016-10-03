@@ -48,7 +48,7 @@ class TwilioSMSDevice(Device):
 
     """
     number = models.CharField(
-        max_length=16,
+        max_length=30,
         help_text="The mobile number to deliver tokens to."
     )
 
