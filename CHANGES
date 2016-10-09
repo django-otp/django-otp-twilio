@@ -1,5 +1,11 @@
 .. vim: ft=rst nospell tw=80
 
+v0.3.5 - October 9, 2016 - Longer numbers
+-----------------------------------------
+
+- Support longer phone numbers.
+
+
 v0.3.4 - January 10, 2016 - Python 3 cleanup
 --------------------------------------------
 
