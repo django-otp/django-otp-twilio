@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('confirmed', models.BooleanField(default=True, help_text='Is this device ready for use?')),
                 ('number', models.CharField(help_text='The mobile number to deliver tokens to.', max_length=16)),
                 ('key', models.CharField(default=otp_twilio.models.default_key, help_text='A random key used to generate tokens (hex-encoded).', max_length=40, validators=[otp_twilio.models.key_validator])),
-                ('user', models.ForeignKey(help_text='The user that this device belongs to.', to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(help_text='The user that this device belongs to.', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,
