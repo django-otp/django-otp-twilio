@@ -36,7 +36,12 @@ class TwilioSMSDevice(Device):
 
     .. attribute:: number
 
-        *CharField*: The mobile phone number to deliver to.
+        *CharField*: The mobile phone number to deliver to. `Twilio recommends
+        <https://www.twilio.com/docs/api/rest/sending-messages>`_ using the
+        `E.164 <http://en.wikipedia.org/wiki/E.164>`_ format. For US numbers,
+        this would look like '+15555555555'. At the time of writing, Twilio
+        will try to infer the correct E.164 format if it is not used, but this
+        should not be relied upon.
 
     .. attribute:: key
 
@@ -49,7 +54,7 @@ class TwilioSMSDevice(Device):
     """
     number = models.CharField(
         max_length=30,
-        help_text="The mobile number to deliver tokens to."
+        help_text="The mobile number to deliver tokens to (E.164)."
     )
 
     key = models.CharField(
@@ -95,7 +100,7 @@ class TwilioSMSDevice(Device):
     def _deliver_token(self, token):
         self._validate_config()
 
-        url = 'https://api.twilio.com/2010-04-01/Accounts/{0}/SMS/Messages.json'.format(settings.OTP_TWILIO_ACCOUNT)
+        url = 'https://api.twilio.com/2010-04-01/Accounts/{0}/Messages.json'.format(settings.OTP_TWILIO_ACCOUNT)
         data = {
             'From': settings.OTP_TWILIO_FROM,
             'To': self.number,
