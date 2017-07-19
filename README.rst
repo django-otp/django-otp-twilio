@@ -1,5 +1,7 @@
 .. vim:ft=rst
 
+`Package Documentation <http://django-otp-twilio.readthedocs.io/>`_
+
 This is a django-otp plugin that delivers tokens via Twilio's `SMS
 <https://www.twilio.com/sms>`_ service.
 
