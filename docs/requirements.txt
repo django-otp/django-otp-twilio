@@ -1,3 +1,1 @@
-django
-django-otp
-requests
+django-otp-twilio
