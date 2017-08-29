@@ -39,6 +39,14 @@ class TestTwilioSMS(TestCase):
 
         self.assertTrue(ok)
 
+    def test_default_key(self):
+        device = self.alice.twiliosmsdevice_set.create(number='test')
+        with self.with_time(self._now):
+            token = device.generate_challenge()
+            ok = device.verify_token(token)
+
+        self.assertTrue(ok)
+
     def test_barely_made_it(self):
         """ Verify a code at the last possible second. """
         device = self.alice.twiliosmsdevice_set.get()
