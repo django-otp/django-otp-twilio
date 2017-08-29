@@ -1,5 +1,13 @@
 .. vim: ft=rst nospell tw=80
 
+v0.4.1 - August 29, 2017 - Default keys
+---------------------------------------
+
+- Fix `#25`_: make sure default keys are unicode values.
+
+.. _#25: https://bitbucket.org/psagers/django-otp/issues/25/attributeerror-bytes-object-has-no
+
+
 v0.4.0 - July 19, 2017 - Update support matrix
 ----------------------------------------------
 
