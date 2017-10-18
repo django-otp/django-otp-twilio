@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='twiliosmsdevice',
             name='number',
-            field=models.CharField(help_text='The mobile number to deliver tokens to.', max_length=30),
+            field=models.CharField(help_text='The mobile number to deliver tokens to (E.164).', max_length=30),
         ),
     ]
