@@ -106,7 +106,7 @@ class TestTwilioSMS(TestCase):
             device.generate_challenge()
         match = re.match(r'^Token is (\d{6})$', self._delivered)
 
-        self.assertTrue(match is not None)
+        self.assertIsNotNone(match)
         self.assertTrue(device.verify_token(match.group(1)))
 
     #
