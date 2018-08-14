@@ -1,5 +1,11 @@
 .. vim: ft=rst nospell tw=80
 
+v0.5.0 - August 14, 2018 - Django 2.1 support
+---------------------------------------------
+
+- Drop support for Django < 1.11.
+
+
 v0.4.2 - October 18, 2017 - Fix migration
 -----------------------------------------
 
