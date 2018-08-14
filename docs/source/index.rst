@@ -9,21 +9,20 @@ Installation
 
 django-otp-twilio can be installed via pip:
 
-  pip install django-otp-twilio
+    pip install django-otp-twilio
 
 
 Once installed it should be added to INSTALLED_APPS after django_otp core:
 
+    INSTALLED_APPS = [
+        ...
+        'django_otp',
+        'django_otp.plugins.otp_totp',
+        'django_otp.plugins.otp_hotp',
+        'django_otp.plugins.otp_static',
 
-  INSTALLED_APPS = [
-  ...
-  'django_otp',
-  'django_otp.plugins.otp_totp',
-  'django_otp.plugins.otp_hotp',
-  'django_otp.plugins.otp_static',
-
-  'otp_twilio',
-  ]
+        'otp_twilio',
+    ]
 
 
 Twilio SMS Devices
