@@ -8,4 +8,4 @@ on the OTP framework.
 * Documentation: https://django-otp-twilio.readthedocs.io/
 * Mailing list: https://groups.google.com/forum/#!forum/django-otp
 
-.. _upgrade notes: https://pythonhosted.org/django-otp/overview.html#upgrading
+.. _upgrade notes: https://django-otp-twilio.readthedocs.io/#upgrading
