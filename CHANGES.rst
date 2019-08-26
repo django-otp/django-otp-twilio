@@ -1,5 +1,3 @@
-.. vim: ft=rst nospell tw=80
-
 v0.5.0 - August 14, 2018 - Django 2.1 support
 ---------------------------------------------
 

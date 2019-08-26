@@ -2,7 +2,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from binascii import unhexlify
 import logging
-import requests
 import time
 
 from django.core.exceptions import ImproperlyConfigured
@@ -11,7 +10,8 @@ from django.utils.encoding import force_text
 
 from django_otp.models import Device
 from django_otp.oath import TOTP
-from django_otp.util import random_hex, hex_validator
+from django_otp.util import hex_validator, random_hex
+import requests
 
 from .conf import settings
 

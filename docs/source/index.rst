@@ -7,12 +7,12 @@ django-otp-twilio
 Installation
 ------------
 
-django-otp-twilio can be installed via pip:
+django-otp-twilio can be installed via pip::
 
     pip install django-otp-twilio
 
 
-Once installed it should be added to INSTALLED_APPS after django_otp core:
+Once installed it should be added to INSTALLED_APPS after django_otp core::
 
     INSTALLED_APPS = [
         ...

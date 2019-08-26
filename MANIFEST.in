@@ -1,6 +1,4 @@
-include CHANGES LICENSE README.rst
+include CHANGES.rst LICENSE README.rst
 
 recursive-include docs *.rst *.py Makefile
 prune docs/build
-
-global-exclude .DS_Store
