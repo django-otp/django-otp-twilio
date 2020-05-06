@@ -1,5 +1,3 @@
-from __future__ import absolute_import, division, print_function, unicode_literals
-
 import django.conf
 import django.test.utils
 
@@ -16,6 +14,7 @@ class Settings(object):
         'OTP_TWILIO_CHALLENGE_MESSAGE': "Sent by SMS",
         'OTP_TWILIO_FROM': None,
         'OTP_TWILIO_NO_DELIVERY': False,
+        'OTP_TWILIO_THROTTLE_FACTOR': 1,
         'OTP_TWILIO_TOKEN_TEMPLATE': '{token}',
         'OTP_TWILIO_TOKEN_VALIDITY': 30,
     }

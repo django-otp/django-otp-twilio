@@ -96,6 +96,17 @@ Send tokens to the 'otp_twilio.models' logger instead of delivering them by SMS.
 Useful for development.
 
 
+.. setting:: OTP_TWILIO_THROTTLE_FACTOR
+
+**OTP_TWILIO_THROTTLE_FACTOR**
+
+Default: ``1``
+
+This controls the rate of throttling. The sequence of 1, 2, 4, 8... seconds is
+multiplied by this factor to define the delay imposed after 1, 2, 3, 4...
+successive failures. Set to ``0`` to disable throttling completely.
+
+
 .. setting:: OTP_TWILIO_TOKEN_TEMPLATE
 
 **OTP_TWILIO_TOKEN_TEMPLATE**

@@ -1,5 +1,3 @@
-from __future__ import absolute_import, division, print_function, unicode_literals
-
 from django.contrib import admin
 from django.contrib.admin.sites import AlreadyRegistered
 
@@ -16,7 +14,7 @@ class TwilioSMSDeviceAdmin(admin.ModelAdmin):
             'fields': ['user', 'name', 'confirmed'],
         }),
         ('Configuration', {
-            'fields': ['number', 'key'],
+            'fields': ['number'],
         }),
     ]
     raw_id_fields = ['user']

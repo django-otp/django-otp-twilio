@@ -1,3 +1,13 @@
+Unreleased - ThrottlingMixin and SideChannelDevice
+-------------------------------------------------------------------------------
+
+TwilioSMSDevice is now a :class:`~django_otp.models.SideChannelDevice` and
+implements :class:`~django_otp.models.ThrottlingMixin`.
+
+This also drops support for old versions of Python (2.7) and Django (1.11,
+2.1).
+
+
 v0.5.1 - August 26, 2019 - Housekeeping
 ---------------------------------------
 

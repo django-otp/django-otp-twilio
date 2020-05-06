@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-isort = "*"
+isort = {extras = ["pipfile"],version = "*"}
 flake8 = "*"
 django = "*"
 setuptools = "*"
@@ -13,6 +13,8 @@ twine = "*"
 sphinx = "*"
 coverage = "*"
 django-otp-twilio = {editable = true,path = "."}
+freezegun = "*"
+bumpversion = "*"
 
 [packages]
 
