@@ -4,7 +4,7 @@
 .. image:: https://img.shields.io/readthedocs/django-otp-twilio
    :target: https://django-otp-twilio.readthedocs.io/
    :alt: Documentation
-.. image:: https://img.shields.io/badge/github-django--agent--trust-green
+.. image:: https://img.shields.io/badge/github-django--otp--twilio-green
    :target: https://github.com/django-otp/django-otp-twilio
    :alt: Source
 
