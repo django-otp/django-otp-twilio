@@ -1,4 +1,4 @@
-Unreleased - Update test matrix
+v1.0.0 - August 13, 2020 - Update test matrix
 ------------------------------------------------------------
 
 - Added Django 3.1 to the test environments and fixed deprecation warnings.
