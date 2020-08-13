@@ -1,10 +1,10 @@
-from django.conf.urls import url
 from django.contrib import admin
 import django.contrib.auth.views
+from django.urls import path
 
 
 urlpatterns = [
-    url(r'^login/$', django.contrib.auth.views.LoginView.as_view()),
-    url(r'^logout/$', django.contrib.auth.views.LogoutView.as_view()),
-    url(r'^admin/', admin.site.urls),
+    path('login/', django.contrib.auth.views.LoginView.as_view()),
+    path('logout/', django.contrib.auth.views.LogoutView.as_view()),
+    path('admin/', admin.site.urls),
 ]

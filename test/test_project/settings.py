@@ -60,3 +60,5 @@ TEMPLATES = [
 SECRET_KEY = 'PWuluw4x48GkT7JDPzlDQsBJC8pjIIiqodW9MuMYcU315YEkGJL41i5qooJsg3Tt'
 
 ROOT_URLCONF = 'test_project.urls'
+
+USE_TZ = True

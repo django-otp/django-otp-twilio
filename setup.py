@@ -18,6 +18,7 @@ setup(
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
         "Topic :: Security",
@@ -28,7 +29,7 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
     install_requires=[
-        'django-otp >= 0.9.0',
+        'django-otp >= 1.0.0',
         'requests',
     ],
 )

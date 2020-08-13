@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-isort = {extras = ["pipfile"],version = "*"}
+isort = "==5.*"
 flake8 = "*"
 django = "*"
 setuptools = "*"

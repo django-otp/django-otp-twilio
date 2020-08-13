@@ -1,3 +1,11 @@
+Unreleased - Update test matrix
+------------------------------------------------------------
+
+- Added Django 3.1 to the test environments and fixed deprecation warnings.
+
+- Version bumped to align with the core django-otp project.
+
+
 v0.6.0 - May 06, 2020 - ThrottlingMixin and SideChannelDevice
 -------------------------------------------------------------------------------
 
