@@ -2,7 +2,7 @@ import logging
 
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from django_otp.models import SideChannelDevice, ThrottlingMixin
 from django_otp.util import hex_validator, random_hex
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 def default_key():  # pragma: no cover
     """ Obsolete code here for migrations. """
-    return force_text(random_hex(20))
+    return force_str(random_hex(20))
 
 
 def key_validator(value):  # pragma: no cover

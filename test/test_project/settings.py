@@ -1,4 +1,4 @@
-# django-agent-trust test project
+# django-otp-twilio test project
 
 from os.path import abspath, dirname, join
 
@@ -15,6 +15,8 @@ DATABASES = {
         'NAME': ':memory:',
     }
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
