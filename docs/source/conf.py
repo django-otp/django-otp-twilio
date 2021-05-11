@@ -55,7 +55,8 @@ django.conf.settings.configure(
 
         'django_otp',
         'otp_twilio',
-    ]
+    ],
+    SECRET_KEY='properly-configured',
 )
 django.setup()
 
