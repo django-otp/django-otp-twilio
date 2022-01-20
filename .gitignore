@@ -1,6 +1,13 @@
+# Python
+__pycache__/
+
 # setuptools
 /MANIFEST
 /build/
 /dist/
 /docs/build/
 *.egg-info/
+
+# Other tools
+/.tox/
+/.coverage
