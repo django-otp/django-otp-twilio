@@ -77,7 +77,7 @@ class TwilioSMSDevice(ThrottlingMixin, SideChannelDevice):
     def _deliver_token(self, token):
         self._validate_config()
 
-        url = 'https://api.twilio.com/2010-04-01/Accounts/{0}/Messages.json'.format(settings.OTP_TWILIO_ACCOUNT)
+        url = '{0}/2010-04-01/Accounts/{1}/Messages.json'.format(settings.OTP_TWILIO_URL, settings.OTP_TWILIO_ACCOUNT)
         data = {
             'From': settings.OTP_TWILIO_FROM,
             'To': self.number,
@@ -86,7 +86,7 @@ class TwilioSMSDevice(ThrottlingMixin, SideChannelDevice):
 
         response = requests.post(
             url, data=data,
-            auth=(settings.OTP_TWILIO_ACCOUNT, settings.OTP_TWILIO_AUTH)
+            auth=(settings.TWILIO_API_KEY if settings.TWILIO_API_KEY else settings.OTP_TWILIO_ACCOUNT, settings.OTP_TWILIO_AUTH)
         )
 
         try:
