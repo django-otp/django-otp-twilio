@@ -1,8 +1,13 @@
+v1.0.2 - April 11, 2023 - New configuration options
+--------------------------------------------------------------------------------
+
+- Allow configuration of API URL and API key.
+
+
 v1.0.1 - November 29, 2021 - Forward compatibility
 --------------------------------------------------------------------------------
 
 Default to AutoField to avoid spurious migrations.
-
 
 
 v1.0.0 - August 13, 2020 - Update test matrix
