@@ -45,6 +45,14 @@ well:
 Settings
 --------
 
+.. setting:: OTP_TWILIO_URL
+
+**OTP_TWILIO_URL**
+
+Default: ``"https://api.twilio.com""``
+
+Twilio API URL. This can be used to change edge location
+
 .. setting:: OTP_TWILIO_ACCOUNT
 
 **OTP_TWILIO_ACCOUNT**
@@ -53,6 +61,14 @@ Default: ``None``
 
 Your Twilio account ID.
 
+.. setting:: OTP_TWILIO_API_KEY
+
+**OTP_TWILIO_API_KEY**
+
+Default: ``None``
+
+Your Twilio API key, if no API key is specified requests are made using the Twilio Account ID.
+
 
 .. setting:: OTP_TWILIO_AUTH
 
@@ -60,7 +76,7 @@ Your Twilio account ID.
 
 Default: ``None``
 
-Your Twilio auth token.
+Your Twilio auth token used for API requests. (Either API Key token or account auth token)
 
 
 .. setting:: OTP_TWILIO_CHALLENGE_MESSAGE

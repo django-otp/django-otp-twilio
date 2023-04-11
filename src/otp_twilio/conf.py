@@ -9,7 +9,9 @@ class Settings(object):
     values if they are not specified by the configuration.
     """
     _defaults = {
+        'OTP_TWILIO_URL': "https://api.twilio.com",
         'OTP_TWILIO_ACCOUNT': None,
+        'OTP_TWILIO_API_KEY': None,
         'OTP_TWILIO_AUTH': None,
         'OTP_TWILIO_CHALLENGE_MESSAGE': "Sent by SMS",
         'OTP_TWILIO_FROM': None,
