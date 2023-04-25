@@ -1,3 +1,11 @@
+v1.0.3 - April 25, 2023 - Fix API key handling
+--------------------------------------------------------------------------------
+
+Fix `#6`_: Code uses "TWILIO_API_KEY" instead of "OTP_TWILIO_API_KEY"
+
+.. _#6: https://github.com/django-otp/django-otp-twilio/pull/6
+
+
 v1.0.2 - April 11, 2023 - New configuration options
 --------------------------------------------------------------------------------
 
