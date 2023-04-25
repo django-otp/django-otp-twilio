@@ -86,7 +86,7 @@ class TwilioSMSDevice(ThrottlingMixin, SideChannelDevice):
 
         response = requests.post(
             url, data=data,
-            auth=(settings.TWILIO_API_KEY if settings.TWILIO_API_KEY else settings.OTP_TWILIO_ACCOUNT, settings.OTP_TWILIO_AUTH)
+            auth=(settings.OTP_TWILIO_API_KEY if settings.OTP_TWILIO_API_KEY else settings.OTP_TWILIO_ACCOUNT, settings.OTP_TWILIO_AUTH)
         )
 
         try:
