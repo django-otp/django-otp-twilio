@@ -8,6 +8,7 @@ class Settings(object):
     instance will contain all of our settings as attributes, with default
     values if they are not specified by the configuration.
     """
+
     _defaults = {
         'OTP_TWILIO_URL': "https://api.twilio.com",
         'OTP_TWILIO_ACCOUNT': None,

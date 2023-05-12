@@ -1,10 +1,10 @@
 from unittest import mock
 
-from django.db import IntegrityError
-from django.test.utils import override_settings
-
 from django_otp.tests import TestCase, ThrottlingTestMixin
 from freezegun import freeze_time
+
+from django.db import IntegrityError
+from django.test.utils import override_settings
 
 from .conf import settings
 
@@ -33,7 +33,7 @@ class TestTwilioSMS(TwilioDeviceMixin, TestCase):
         self._delivered = None
 
     def test_instant(self):
-        """ Verify a code the instant it was generated. """
+        """Verify a code the instant it was generated."""
         with freeze_time():
             token = self.device.generate_challenge()
             ok = self.device.verify_token(token)
@@ -41,7 +41,7 @@ class TestTwilioSMS(TwilioDeviceMixin, TestCase):
         self.assertTrue(ok)
 
     def test_barely_made_it(self):
-        """ Verify a code at the last possible second. """
+        """Verify a code at the last possible second."""
         with freeze_time() as frozen_time:
             token = self.device.generate_challenge()
             frozen_time.tick(delta=(settings.OTP_TWILIO_TOKEN_VALIDITY - 1))
@@ -50,7 +50,7 @@ class TestTwilioSMS(TwilioDeviceMixin, TestCase):
         self.assertTrue(ok)
 
     def test_too_late(self):
-        """ Try to verify a code one second after it expires. """
+        """Try to verify a code one second after it expires."""
         with freeze_time() as frozen_time:
             token = self.device.generate_challenge()
             frozen_time.tick(delta=(settings.OTP_TWILIO_TOKEN_VALIDITY + 1))
@@ -59,7 +59,7 @@ class TestTwilioSMS(TwilioDeviceMixin, TestCase):
         self.assertFalse(ok)
 
     def test_code_reuse(self):
-        """ Try to verify the same code twice. """
+        """Try to verify the same code twice."""
         with freeze_time():
             token = self.device.generate_challenge()
             ok1 = self.device.verify_token(token)
@@ -80,7 +80,9 @@ class TestTwilioSMS(TwilioDeviceMixin, TestCase):
         OTP_TWILIO_TOKEN_TEMPLATE='Token is {token}',
     )
     def test_format(self):
-        with mock.patch('otp_twilio.models.TwilioSMSDevice._deliver_token', self._deliver_token):
+        with mock.patch(
+            'otp_twilio.models.TwilioSMSDevice._deliver_token', self._deliver_token
+        ):
             self.device.generate_challenge()
 
         self.assertEqual('Token is {}'.format(self.device.token), self._delivered)

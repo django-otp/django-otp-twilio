@@ -1,26 +1,25 @@
 import logging
 
-from django.core.exceptions import ImproperlyConfigured
-from django.db import models
-from django.utils.encoding import force_str
-
 from django_otp.models import SideChannelDevice, ThrottlingMixin
 from django_otp.util import hex_validator, random_hex
 import requests
 
-from .conf import settings
+from django.core.exceptions import ImproperlyConfigured
+from django.db import models
+from django.utils.encoding import force_str
 
+from .conf import settings
 
 logger = logging.getLogger(__name__)
 
 
 def default_key():  # pragma: no cover
-    """ Obsolete code here for migrations. """
+    """Obsolete code here for migrations."""
     return force_str(random_hex(20))
 
 
 def key_validator(value):  # pragma: no cover
-    """ Obsolete code here for migrations. """
+    """Obsolete code here for migrations."""
     return hex_validator(20)(value)
 
 
@@ -42,9 +41,9 @@ class TwilioSMSDevice(ThrottlingMixin, SideChannelDevice):
         should not be relied upon.
 
     """
+
     number = models.CharField(
-        max_length=30,
-        help_text="The mobile number to deliver tokens to (E.164)."
+        max_length=30, help_text="The mobile number to deliver tokens to (E.164)."
     )
 
     class Meta(SideChannelDevice.Meta):
@@ -77,7 +76,9 @@ class TwilioSMSDevice(ThrottlingMixin, SideChannelDevice):
     def _deliver_token(self, token):
         self._validate_config()
 
-        url = '{0}/2010-04-01/Accounts/{1}/Messages.json'.format(settings.OTP_TWILIO_URL, settings.OTP_TWILIO_ACCOUNT)
+        url = '{0}/2010-04-01/Accounts/{1}/Messages.json'.format(
+            settings.OTP_TWILIO_URL, settings.OTP_TWILIO_ACCOUNT
+        )
         data = {
             'From': settings.OTP_TWILIO_FROM,
             'To': self.number,
@@ -85,8 +86,14 @@ class TwilioSMSDevice(ThrottlingMixin, SideChannelDevice):
         }
 
         response = requests.post(
-            url, data=data,
-            auth=(settings.OTP_TWILIO_API_KEY if settings.OTP_TWILIO_API_KEY else settings.OTP_TWILIO_ACCOUNT, settings.OTP_TWILIO_AUTH)
+            url,
+            data=data,
+            auth=(
+                settings.OTP_TWILIO_API_KEY
+                if settings.OTP_TWILIO_API_KEY
+                else settings.OTP_TWILIO_ACCOUNT,
+                settings.OTP_TWILIO_AUTH,
+            ),
         )
 
         try:
@@ -102,13 +109,19 @@ class TwilioSMSDevice(ThrottlingMixin, SideChannelDevice):
 
     def _validate_config(self):
         if settings.OTP_TWILIO_ACCOUNT is None:
-            raise ImproperlyConfigured('OTP_TWILIO_ACCOUNT must be set to your Twilio account identifier')
+            raise ImproperlyConfigured(
+                'OTP_TWILIO_ACCOUNT must be set to your Twilio account identifier'
+            )
 
         if settings.OTP_TWILIO_AUTH is None:
-            raise ImproperlyConfigured('OTP_TWILIO_AUTH must be set to your Twilio auth token')
+            raise ImproperlyConfigured(
+                'OTP_TWILIO_AUTH must be set to your Twilio auth token'
+            )
 
         if settings.OTP_TWILIO_FROM is None:
-            raise ImproperlyConfigured('OTP_TWILIO_FROM must be set to one of your Twilio phone numbers')
+            raise ImproperlyConfigured(
+                'OTP_TWILIO_FROM must be set to one of your Twilio phone numbers'
+            )
 
     def verify_token(self, token):
         verify_allowed, _ = self.verify_is_allowed()
