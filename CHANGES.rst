@@ -1,3 +1,11 @@
+v1.0.4 - July 20, 2023 - Add OTP_TWILIO_MESSAGING_SERVICE_SID setting
+--------------------------------------------------------------------------------
+
+`#9`_: OTP_TWILIO_MESSAGING_SERVICE_SID setting
+
+.. _#9: https://github.com/django-otp/django-otp-twilio/pull/9
+
+
 v1.0.3 - April 25, 2023 - Fix API key handling
 --------------------------------------------------------------------------------
 
