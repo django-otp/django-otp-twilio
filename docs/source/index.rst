@@ -103,6 +103,17 @@ The phone number to send SMS messages from. This must be one of your Twilio
 numbers.
 
 
+.. setting:: OTP_TWILIO_MESSAGING_SERVICE_SID
+
+**OTP_TWILIO_MESSAGING_SERVICE_SID**
+
+Default: ``None``
+
+The Twilio messaging service SID to send SMS messages from. This must be one of
+your Twilio messaging services. If supplied, this takes precedence over
+``OTP_TWILIO_FROM``.
+
+
 .. setting:: OTP_TWILIO_NO_DELIVERY
 
 **OTP_TWILIO_NO_DELIVERY**
