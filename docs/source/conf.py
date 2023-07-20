@@ -18,7 +18,6 @@ import sys
 import django
 import django.conf
 
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -35,7 +34,6 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
-
     'otpdocs',
 ]
 
@@ -52,7 +50,6 @@ django.conf.settings.configure(
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'django.contrib.messages',
-
         'django_otp',
         'otp_twilio',
     ],
@@ -62,8 +59,10 @@ django.setup()
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
-    'django': ('https://docs.djangoproject.com/en/2.2/',
-               'https://docs.djangoproject.com/en/2.2/_objects/'),
+    'django': (
+        'https://docs.djangoproject.com/en/4.2/',
+        'https://docs.djangoproject.com/en/4.2/_objects/',
+    ),
     'django-otp': ('http://django-otp-official.readthedocs.io/en/latest/', None),
 }
 
@@ -213,10 +212,8 @@ htmlhelp_basename = 'django-otp-twiliodoc'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     # 'papersize': 'letterpaper',
-
     # The font size ('10pt', '11pt' or '12pt').
     # 'pointsize': '10pt',
-
     # Additional stuff for the LaTeX preamble.
     # 'preamble': '',
 }
@@ -224,8 +221,13 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ('index', 'django-otp-twilio.tex', u'django-otp-twilio Documentation',
-     'Peter Sagerson', 'manual'),
+    (
+        'index',
+        'django-otp-twilio.tex',
+        u'django-otp-twilio Documentation',
+        'Peter Sagerson',
+        'manual',
+    ),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -254,8 +256,13 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'django-otp-twilio', u'django-otp-twilio Documentation',
-     [u'Peter Sagerson'], 1)
+    (
+        'index',
+        'django-otp-twilio',
+        u'django-otp-twilio Documentation',
+        [u'Peter Sagerson'],
+        1,
+    )
 ]
 
 # If true, show URL addresses after external links.
@@ -268,9 +275,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'django-otp-twilio', u'django-otp-twilio Documentation',
-     'Peter Sagerson', 'django-otp-twilio', 'One line description of project.',
-     'Miscellaneous'),
+    (
+        'index',
+        'django-otp-twilio',
+        u'django-otp-twilio Documentation',
+        'Peter Sagerson',
+        'django-otp-twilio',
+        'One line description of project.',
+        'Miscellaneous',
+    ),
 ]
 
 # Documents to append as an appendix to all manuals.

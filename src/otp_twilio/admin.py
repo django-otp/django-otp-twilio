@@ -9,13 +9,20 @@ class TwilioSMSDeviceAdmin(admin.ModelAdmin):
     :class:`~django.contrib.admin.ModelAdmin` for
     :class:`~otp_twilio.models.TwilioSMSDevice`.
     """
+
     fieldsets = [
-        ('Identity', {
-            'fields': ['user', 'name', 'confirmed'],
-        }),
-        ('Configuration', {
-            'fields': ['number'],
-        }),
+        (
+            'Identity',
+            {
+                'fields': ['user', 'name', 'confirmed'],
+            },
+        ),
+        (
+            'Configuration',
+            {
+                'fields': ['number'],
+            },
+        ),
     ]
     raw_id_fields = ['user']
 

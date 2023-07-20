@@ -2,6 +2,7 @@ django-otp-twilio
 =================
 
 .. include:: ../../README.rst
+   :end-before: .. end-of-doc-intro
 
 
 Installation
@@ -29,7 +30,7 @@ Twilio SMS Devices
 ------------------
 
 .. autoclass:: otp_twilio.models.TwilioSMSDevice
-    :members:
+   :members:
 
 
 Admin
