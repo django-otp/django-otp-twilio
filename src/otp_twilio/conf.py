@@ -15,6 +15,7 @@ class Settings(object):
         'OTP_TWILIO_AUTH': None,
         'OTP_TWILIO_CHALLENGE_MESSAGE': "Sent by SMS",
         'OTP_TWILIO_FROM': None,
+        'OTP_TWILIO_MESSAGING_SERVICE_SID': None,
         'OTP_TWILIO_NO_DELIVERY': False,
         'OTP_TWILIO_THROTTLE_FACTOR': 1,
         'OTP_TWILIO_TOKEN_TEMPLATE': '{token}',

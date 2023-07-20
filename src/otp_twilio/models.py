@@ -79,10 +79,13 @@ class TwilioSMSDevice(ThrottlingMixin, SideChannelDevice):
 
         url = '{0}/2010-04-01/Accounts/{1}/Messages.json'.format(settings.OTP_TWILIO_URL, settings.OTP_TWILIO_ACCOUNT)
         data = {
-            'From': settings.OTP_TWILIO_FROM,
             'To': self.number,
             'Body': str(token),
         }
+        if settings.OTP_TWILIO_MESSAGING_SERVICE_SID:
+            data['MessagingServiceSid'] = settings.OTP_TWILIO_MESSAGING_SERVICE_SID
+        else:
+            data['From'] = settings.OTP_TWILIO_FROM
 
         response = requests.post(
             url, data=data,
