@@ -1,8 +1,14 @@
 v1.0.4 - July 20, 2023 - Add OTP_TWILIO_MESSAGING_SERVICE_SID setting
 --------------------------------------------------------------------------------
 
+This project is now managed with `hatch`_, which replaces setuptools, pipenv,
+and tox. Users of the package should not be impacted. Developers can refer to
+the readme for details. If you're packaging this project from source, I suggest
+relying on pip's isolated builds rather than using hatch directly.
+
 `#9`_: OTP_TWILIO_MESSAGING_SERVICE_SID setting
 
+.. _hatch: https://hatch.pypa.io/
 .. _#9: https://github.com/django-otp/django-otp-twilio/pull/9
 
 
