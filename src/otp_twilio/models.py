@@ -85,8 +85,12 @@ class TwilioSMSDevice(ThrottlingMixin, SideChannelDevice):
         }
         if settings.OTP_TWILIO_MESSAGING_SERVICE_SID:
             data['MessagingServiceSid'] = settings.OTP_TWILIO_MESSAGING_SERVICE_SID
-        else:
+        elif settings.OTP_TWILIO_FROM:
             data['From'] = settings.OTP_TWILIO_FROM
+        else:
+            raise ImproperlyConfigured(
+                'Either OTP_TWILIO_FROM or OTP_TWILIO_MESSAGING_SERVICE_SID must be set.'
+            )
 
         response = requests.post(
             url,
@@ -119,11 +123,6 @@ class TwilioSMSDevice(ThrottlingMixin, SideChannelDevice):
         if settings.OTP_TWILIO_AUTH is None:
             raise ImproperlyConfigured(
                 'OTP_TWILIO_AUTH must be set to your Twilio auth token'
-            )
-
-        if settings.OTP_TWILIO_FROM is None:
-            raise ImproperlyConfigured(
-                'OTP_TWILIO_FROM must be set to one of your Twilio phone numbers'
             )
 
     def verify_token(self, token):
