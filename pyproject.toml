@@ -1,6 +1,6 @@
 [project]
 name = "django-otp-twilio"
-version = "1.0.4"
+version = "1.0.5"
 description = "A django-otp plugin that delivers tokens via Twilio's SMS service."
 readme = "README.rst"
 requires-python = ">=3.7"

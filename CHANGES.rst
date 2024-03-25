@@ -1,3 +1,11 @@
+v1.0.5 - March 25, 2024 - Fix config validation
+--------------------------------------------------------------------------------
+
+Fix `#10`_: Messaging Service Does Not Work Without OTP_TWILIO_FROM Setting
+
+.. _#10: https://github.com/django-otp/django-otp-twilio/pull/10
+
+
 v1.0.4 - July 20, 2023 - Add OTP_TWILIO_MESSAGING_SERVICE_SID setting
 --------------------------------------------------------------------------------
 
