@@ -96,9 +96,11 @@ class TwilioSMSDevice(ThrottlingMixin, SideChannelDevice):
             url,
             data=data,
             auth=(
-                settings.OTP_TWILIO_API_KEY
-                if settings.OTP_TWILIO_API_KEY
-                else settings.OTP_TWILIO_ACCOUNT,
+                (
+                    settings.OTP_TWILIO_API_KEY
+                    if settings.OTP_TWILIO_API_KEY
+                    else settings.OTP_TWILIO_ACCOUNT
+                ),
                 settings.OTP_TWILIO_AUTH,
             ),
         )
