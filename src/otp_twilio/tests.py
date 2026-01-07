@@ -1,6 +1,6 @@
 from unittest import mock
 
-from django_otp.tests import TestCase, ThrottlingTestMixin
+from django_otp.test_utils import TestCase, ThrottlingTestMixin
 from freezegun import freeze_time
 
 from django.db import IntegrityError
